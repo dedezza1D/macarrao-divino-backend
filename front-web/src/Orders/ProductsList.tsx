@@ -16,5 +16,4 @@ function ProductsList({ products }: Props) {
     </div>
   )
 }
-
-export default ProductsList
+export default ProductsList;
