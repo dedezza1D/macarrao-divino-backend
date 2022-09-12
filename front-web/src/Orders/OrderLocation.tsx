@@ -28,23 +28,23 @@ function OrderLocation({onChangeLocation}: Props) {
         position: initialPosition
     });
 
-    const loadOptions = async (inputValue: string, callback: (places: Place[]) => void) => {
-        const response = await fetchLocalMapBox(inputValue);
-      
-        const places = response.data.features.map((item: any) => {
-          return ({
-            label: item.place_name,
-            value: item.place_name,
-            position: {
-              lat: item.center[1],
-              lng: item.center[0]
-            },
-            place: item.place_name,
-          });
+    const loadOptions = (inputValue: string, callback: (places: Place[]) => void) => {
+    
+        fetchLocalMapBox(inputValue)
+        .then(response => {
+            const places = response.data.features.map((item: any) => ({
+                label: item.place_name,
+                value: item.place_name,
+                position: {
+                    lat: item.center[1],
+                    lng: item.center[0]
+                }
+            }));
+    
+            callback(places);
         });
-      
-        callback(places);
-      };
+    
+    };
       
       const handleChangeSelect = (place: Place) => {
         setAddress(place);
